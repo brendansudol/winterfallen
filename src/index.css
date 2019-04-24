@@ -8,7 +8,90 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+.serif {
+  font-family: athelas, georgia, serif;
+}
+
+.caps {
+  letter-spacing: 0.1em;
+}
+
+@media (min-width: 40em) {
+  .sm-h0 {
+    font-size: 2.5rem;
+  }
+}
+
+.btn {
+  border-radius: 32px;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn:focus {
+  outline: none;
+  border-color: inherit;
+}
+
+.btn-success {
+  background-color: #f6fef9;
+  border-color: #23d160;
+  color: #155724;
+}
+
+.btn-success:hover {
+  box-shadow: inset 0 0 0 20rem rgba(72, 180, 97, 0.0625);
+}
+
+.btn-success:focus {
+  border-color: rgba(72, 180, 97, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(72, 180, 97, 0.5);
+}
+
+.btn-danger {
+  background-color: #fff5f7;
+  border-color: #ff3860;
+  color: #cd0930;
+}
+
+.btn-danger:hover {
+  box-shadow: inset 0 0 0 20rem rgba(225, 83, 97, 0.0625);
+}
+
+.btn-danger:focus {
+  border-color: rgba(225, 83, 97, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(225, 83, 97, 0.5);
+}
+
+.container {
+  max-width: 700px;
+}
+
+.mr01 {
+  margin-right: 2px;
+}
+
+.mr05 {
+  margin-right: 0.25rem;
+}
+
+.mt05 {
+  margin-top: 0.25rem;
+}
+
+.rounded {
+  border-radius: 5px;
+}
+
+.flex-inline {
+  display: inline-flex;
+}
+
+.results {
+  border: 1px dashed #ccc;
+  background-color: #f8f8f8;
+}
+
+.tooltip {
+  font-size: 10px;
 }
