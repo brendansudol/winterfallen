@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/winterfallen/static/css/main.c55eede9.chunk.css",
+    "main.js": "/winterfallen/static/js/main.60b88bad.chunk.js",
+    "main.js.map": "/winterfallen/static/js/main.60b88bad.chunk.js.map",
+    "runtime~main.js": "/winterfallen/static/js/runtime~main.675afdca.js",
+    "runtime~main.js.map": "/winterfallen/static/js/runtime~main.675afdca.js.map",
+    "static/css/2.be55a66c.chunk.css": "/winterfallen/static/css/2.be55a66c.chunk.css",
+    "static/js/2.361a7bec.chunk.js": "/winterfallen/static/js/2.361a7bec.chunk.js",
+    "static/js/2.361a7bec.chunk.js.map": "/winterfallen/static/js/2.361a7bec.chunk.js.map",
+    "index.html": "/winterfallen/index.html",
+    "precache-manifest.0f248fc550f929dcdd2769723aa99cde.js": "/winterfallen/precache-manifest.0f248fc550f929dcdd2769723aa99cde.js",
+    "service-worker.js": "/winterfallen/service-worker.js",
+    "static/css/2.be55a66c.chunk.css.map": "/winterfallen/static/css/2.be55a66c.chunk.css.map",
+    "static/css/main.c55eede9.chunk.css.map": "/winterfallen/static/css/main.c55eede9.chunk.css.map"
+  }
+}
