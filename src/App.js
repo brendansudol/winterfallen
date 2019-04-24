@@ -1,5 +1,5 @@
 import Tippy from "@tippy.js/react";
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 
 const CHARACTERS = [
   { id: "Arya", name: "Arya", hashtag: "#AryaStark" },
@@ -26,12 +26,15 @@ const CHARACTERS = [
 
 const enc = txt => encodeURIComponent(txt);
 
+const predictionHash = characters =>
+  `predictions=${characters.map(c => +c.willDie).join("")}`;
+
 const imgUrl = id => `${process.env.PUBLIC_URL}/img/characters/${id}.png`;
 
-const tweetUrl = characters => {
-  const n = characters.length;
-  const hashtags = characters.map(c => c.hashtag).join(", ");
-  const url = window.location.href;
+const tweetUrl = (fallenCharacters, hash) => {
+  const n = fallenCharacters.length;
+  const hashtags = fallenCharacters.map(c => c.hashtag).join(", ");
+  const url = `${window.location.origin}/#${hash}`;
 
   const msg = `I think ${n} main character${
     n === 1 ? " is" : "s are"
@@ -41,9 +44,15 @@ const tweetUrl = characters => {
 };
 
 class App extends Component {
-  constructor() {
-    super();
-    const characters = CHARACTERS.map(entry => ({ ...entry, willDie: false }));
+  constructor(props) {
+    super(props);
+
+    const { initialPredictions } = props;
+    const characters = CHARACTERS.map((entry, i) => ({
+      ...entry,
+      willDie: !!+initialPredictions[i]
+    }));
+
     this.state = { characters };
   }
 
@@ -58,7 +67,10 @@ class App extends Component {
     );
   };
 
-  updateUrl = () => {};
+  updateUrl = () => {
+    const { characters } = this.state;
+    window.location.hash = predictionHash(characters);
+  };
 
   render() {
     const { characters } = this.state;
@@ -67,9 +79,12 @@ class App extends Component {
     return (
       <div className="p2 mx-auto container app">
         <header className="mb2">
-          <h1 className="m0 sm-h0 serif">The Winterfallen</h1>
+          <a className="text-decoration-none" href="/">
+            <h1 className="m0 sm-h0 serif">The Winterfallen</h1>
+          </a>
           <p className="m0 h5 sm-h4">
-            Predict who will die in the upcoming <em>Battle of Winterfell</em>
+            Predict who will die in the upcoming <em>Battle of Winterfell</em>{" "}
+            on April 28<sup>th</sup>
           </p>
         </header>
         <div className="flex flex-wrap mxn1 mb2  pt1">
@@ -108,38 +123,51 @@ class App extends Component {
           </div>
           {fallen.length > 0 && (
             <div className="mt1 flex flex-wrap">
-              {fallen.map((char, i) => [
-                i > 0 && <span className="mr05">,</span>,
-                <span className="flex-inline items-center">
-                  <img
-                    className="mr01"
-                    src={imgUrl(char.id)}
-                    alt=""
-                    width={18}
-                    height={18}
-                  />
-                  <span>{char.name}</span>
-                </span>
-              ])}
+              {fallen.map((char, i) => (
+                <Fragment key={char.id}>
+                  {i > 0 && <span className="mr05">,</span>}
+                  <span className="flex-inline items-center">
+                    <img
+                      className="mr01"
+                      src={imgUrl(char.id)}
+                      alt=""
+                      width={18}
+                      height={18}
+                    />
+                    <span>{char.name}</span>
+                  </span>
+                </Fragment>
+              ))}
             </div>
           )}
           <div className="mt1">
             <Tippy
-              content="The super cool character emojis will show up in your tweet once it's published to Twitter if you use the suggested hashtags!"
+              content="If you use the suggested hashtags, the super cool character emojis will show up in your tweet once it's published to Twitter!"
               className="tooltip"
               arrow={true}
             >
               <a
-                className="black bold h6"
+                className="bold h6"
                 rel="noopener noreferrer"
                 target="_blank"
-                href={tweetUrl(fallen)}
+                href={tweetUrl(fallen, predictionHash(characters))}
               >
                 Share on Twitter
               </a>
             </Tippy>
           </div>
         </div>
+        <footer className="mt3 mb2 h6">
+          <a href="/">The Winterfallen</a> • Made by{" "}
+          <a
+            rel="noopener noreferrer"
+            target="_blank"
+            href="https://twitter.com/brensudol"
+          >
+            @brensudol
+          </a>{" "}
+          <span className="xs-hide">• I hope you're having a lovely day</span>
+        </footer>
       </div>
     );
   }

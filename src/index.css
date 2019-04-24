@@ -8,6 +8,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+a {
+  color: #000;
+}
+
 .serif {
   font-family: athelas, georgia, serif;
 }
@@ -93,5 +97,5 @@ body {
 }
 
 .tooltip {
-  font-size: 10px;
+  font-size: 12px;
 }

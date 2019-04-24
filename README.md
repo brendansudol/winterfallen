@@ -1,10 +1,12 @@
 TODO:
 
-- persist state to url
-- share links
-- design pass
-- set up custom domain
-- deploy
+- persist state to url (DONE)
+- share links (DONE)
+- design pass (DONE)
+- set up custom domain (DONE)
+- deploy (DONE)
 - tooltip (DONE)
-- google analytics
+- google analytics (DONE)
 - open source
+- footer (DONE)
+- clean up code
