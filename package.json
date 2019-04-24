@@ -1,7 +1,7 @@
 {
   "name": "winterfallen",
   "version": "0.0.1",
-  "homepage": "https://brendansudol.com/winterfallen",
+  "homepage": "https://thewinterfallen.com",
   "private": true,
   "dependencies": {
     "@tippy.js/react": "^2.1.2",
