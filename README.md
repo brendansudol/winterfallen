@@ -1,12 +1,5 @@
-TODO:
+**The Winterfallen**
 
-- persist state to url (DONE)
-- share links (DONE)
-- design pass (DONE)
-- set up custom domain (DONE)
-- deploy (DONE)
-- tooltip (DONE)
-- google analytics (DONE)
-- open source
-- footer (DONE)
-- clean up code
+A silly little site to predict and share who you think is going to die in Game of Thrones.
+
+https://thewinterfallen.com/

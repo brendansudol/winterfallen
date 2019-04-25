@@ -11,7 +11,7 @@ const CHARACTERS = [
   { id: "Euron", name: "Euron", hashtag: "#EuronGreyjoy" },
   { id: "Greyworm", name: "Greyworm", hashtag: "#Greyworm" },
   { id: "JaimeLannister", name: "Jaime", hashtag: "#JaimeLannister" },
-  { id: "JohnSnow", name: "John Snow", hashtag: "#JonSnow" },
+  { id: "JohnSnow", name: "Jon Snow", hashtag: "#JonSnow" },
   { id: "Jorah", name: "Jorah", hashtag: "#JorahMormont" },
   { id: "Missandei", name: "Missandei", hashtag: "#Missandei" },
   { id: "NightKing", name: "Night King", hashtag: "#NightKing" },
@@ -26,16 +26,18 @@ const CHARACTERS = [
 
 const enc = txt => encodeURIComponent(txt);
 
-const predictionHash = characters =>
+const imgUrl = characterId =>
+  `${process.env.PUBLIC_URL}/img/characters/${characterId}.png`;
+
+const urlParams = characters =>
   `predictions=${characters.map(c => +c.willDie).join("")}`;
 
-const imgUrl = id => `${process.env.PUBLIC_URL}/img/characters/${id}.png`;
+const composeTweet = characters => {
+  const url = `${window.location.origin}/#${urlParams(characters)}`;
 
-const tweetUrl = (fallenCharacters, hash) => {
-  const n = fallenCharacters.length;
-  const hashtags = fallenCharacters.map(c => c.hashtag).join(", ");
-  const url = `${window.location.origin}/#${hash}`;
-
+  const fallen = characters.filter(c => c.willDie);
+  const n = fallen.length;
+  const hashtags = fallen.map(c => c.hashtag).join(", ");
   const msg = `I think ${n} main character${
     n === 1 ? " is" : "s are"
   } going to die in the next GoT episode (Battle of Winterfell)... ${hashtags}`;
@@ -56,7 +58,7 @@ class App extends Component {
     this.state = { characters };
   }
 
-  handleToggleStatus = id => () => {
+  handleButtonClick = id => () => {
     this.setState(
       prev => ({
         characters: prev.characters.map(char =>
@@ -68,8 +70,7 @@ class App extends Component {
   };
 
   updateUrl = () => {
-    const { characters } = this.state;
-    window.location.hash = predictionHash(characters);
+    window.location.hash = urlParams(this.state.characters);
   };
 
   render() {
@@ -83,18 +84,18 @@ class App extends Component {
             <h1 className="m0 sm-h0 serif">The Winterfallen</h1>
           </a>
           <p className="m0 h5 sm-h4">
-            Predict who will die in the upcoming <em>Battle of Winterfell</em>{" "}
-            on April 28<sup>th</sup>
+            Predict and share who you think will die in the upcoming{" "}
+            <em>Battle of Winterfell</em> on April 28<sup>th</sup>
           </p>
         </header>
         <div className="flex flex-wrap mxn1 mb2  pt1">
           {characters.map(({ id, name, willDie }) => (
             <div key={id} className="col-6 sm-col-4 px1 mb2">
               <button
-                className={`btn p1 h6 caps col-12 ${
+                className={`btn btn-character p1 h6 caps col-12 ${
                   willDie ? "btn-danger" : "btn-success"
                 }`}
-                onClick={this.handleToggleStatus(id)}
+                onClick={this.handleButtonClick(id)}
                 style={{ height: 48 }}
               >
                 <div className="flex items-center justify-between">
@@ -123,18 +124,18 @@ class App extends Component {
           </div>
           {fallen.length > 0 && (
             <div className="mt1 flex flex-wrap">
-              {fallen.map((char, i) => (
-                <Fragment key={char.id}>
+              {fallen.map(({ id, name }, i) => (
+                <Fragment key={id}>
                   {i > 0 && <span className="mr05">,</span>}
                   <span className="flex-inline items-center">
                     <img
                       className="mr01"
-                      src={imgUrl(char.id)}
+                      src={imgUrl(id)}
                       alt=""
                       width={18}
                       height={18}
                     />
-                    <span>{char.name}</span>
+                    <span>{name}</span>
                   </span>
                 </Fragment>
               ))}
@@ -150,7 +151,7 @@ class App extends Component {
                 className="bold h6"
                 rel="noopener noreferrer"
                 target="_blank"
-                href={tweetUrl(fallen, predictionHash(characters))}
+                href={composeTweet(characters)}
               >
                 Share on Twitter
               </a>

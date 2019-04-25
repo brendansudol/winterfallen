@@ -12,6 +12,12 @@ a {
   color: #000;
 }
 
+@media (min-width: 40em) {
+  .sm-h0 {
+    font-size: 2.5rem;
+  }
+}
+
 .serif {
   font-family: athelas, georgia, serif;
 }
@@ -20,10 +26,37 @@ a {
   letter-spacing: 0.1em;
 }
 
-@media (min-width: 40em) {
-  .sm-h0 {
-    font-size: 2.5rem;
-  }
+.container {
+  max-width: 700px;
+}
+
+.mr01 {
+  margin-right: 2px;
+}
+
+.mr05 {
+  margin-right: 0.25rem;
+}
+
+.mt05 {
+  margin-top: 0.25rem;
+}
+
+.rounded {
+  border-radius: 5px;
+}
+
+.flex-inline {
+  display: inline-flex;
+}
+
+.results {
+  border: 1px dashed #ccc;
+  background-color: #f8f8f8;
+}
+
+.tooltip {
+  font-size: 12px;
 }
 
 .btn {
@@ -65,37 +98,4 @@ a {
 .btn-danger:focus {
   border-color: rgba(225, 83, 97, 0.5);
   box-shadow: 0 0 0 0.2rem rgba(225, 83, 97, 0.5);
-}
-
-.container {
-  max-width: 700px;
-}
-
-.mr01 {
-  margin-right: 2px;
-}
-
-.mr05 {
-  margin-right: 0.25rem;
-}
-
-.mt05 {
-  margin-top: 0.25rem;
-}
-
-.rounded {
-  border-radius: 5px;
-}
-
-.flex-inline {
-  display: inline-flex;
-}
-
-.results {
-  border: 1px dashed #ccc;
-  background-color: #f8f8f8;
-}
-
-.tooltip {
-  font-size: 12px;
 }
