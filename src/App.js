@@ -1,5 +1,5 @@
 import Tippy from "@tippy.js/react";
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 
 const CHARACTERS = [
   { id: "Arya", name: "Arya", hashtag: "#AryaStark" },
@@ -26,11 +26,9 @@ const CHARACTERS = [
 
 const enc = txt => encodeURIComponent(txt);
 
-const imgUrl = characterId =>
-  `${process.env.PUBLIC_URL}/img/characters/${characterId}.png`;
+const imgUrl = characterId => `${process.env.PUBLIC_URL}/img/characters/${characterId}.png`;
 
-const urlParams = characters =>
-  `predictions=${characters.map(c => +c.willDie).join("")}`;
+const urlParams = characters => `predictions=${characters.map(c => +c.willDie).join("")}`;
 
 const composeTweet = characters => {
   const url = `${window.location.origin}/#${urlParams(characters)}`;
@@ -83,9 +81,8 @@ class App extends Component {
           <a className="text-decoration-none" href="/">
             <h1 className="m0 sm-h0 serif">The Winterfallen</h1>
           </a>
-          <p className="m0 h5 sm-h4">
-            Predict and share who you think will die in the upcoming{" "}
-            <em>Battle of Winterfell</em> on April 28<sup>th</sup>
+          <p className="m0 line-height-3">
+            Predict and share who you think will die in the <em>Battle of Winterfell</em>.
           </p>
         </header>
         <div className="flex flex-wrap mxn1 mb2  pt1">
@@ -119,31 +116,25 @@ class App extends Component {
         <div className="p2 rounded results">
           <div>
             I think <strong>{fallen.length}</strong> main{" "}
-            {fallen.length === 1 ? "character is" : "characters are"} going to
-            die in the next GoT episode...
+            {fallen.length === 1 ? "character is" : "characters are"} going to die in the next GoT
+            episode...
           </div>
           {fallen.length > 0 && (
             <div className="mt1 flex flex-wrap">
               {fallen.map(({ id, name }, i) => (
-                <Fragment key={id}>
-                  {i > 0 && <span className="mr05">,</span>}
+                <span key={id} className="mr05 flex">
                   <span className="flex-inline items-center">
-                    <img
-                      className="mr01"
-                      src={imgUrl(id)}
-                      alt=""
-                      width={18}
-                      height={18}
-                    />
+                    <img className="mr01" src={imgUrl(id)} alt="" width={18} height={18} />
                     <span>{name}</span>
                   </span>
-                </Fragment>
+                  {i + 1 < fallen.length && <span>,</span>}
+                </span>
               ))}
             </div>
           )}
           <div className="mt1">
             <Tippy
-              content="If you use the suggested hashtags, the super cool character emojis will show up in your tweet once it's published to Twitter!"
+              content="The GoT character emojis will show up in your tweet once it's published to Twitter!"
               className="tooltip"
               arrow={true}
             >
@@ -160,11 +151,7 @@ class App extends Component {
         </div>
         <footer className="mt3 mb2 h6">
           <a href="/">The Winterfallen</a> • Made by{" "}
-          <a
-            rel="noopener noreferrer"
-            target="_blank"
-            href="https://twitter.com/brensudol"
-          >
+          <a rel="noopener noreferrer" target="_blank" href="https://twitter.com/brensudol">
             @brensudol
           </a>{" "}
           <span className="xs-hide">• I hope you're having a lovely day</span>
